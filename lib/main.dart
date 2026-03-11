@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:long_pic/pages/long_pic_master/long_pic_master_binding.dart';
+import 'package:long_pic/pages/long_pic_master/long_pic_master_view.dart';
+import 'package:long_pic/pages/long_pic_mosaic/long_pic_mosaic_latest.dart';
 import 'db_long_pic/data.dart';
 import '../pages/long_pic_home/long_pic_home_binding.dart';
 import '../pages/long_pic_home/long_pic_home_view.dart';
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           getPages: Quick,
-          initialRoute: '/long_home',
+          initialRoute: '/',
           theme: ThemeData(
             useMaterial3: true,
             primaryColor: primaryColor,
@@ -88,6 +91,14 @@ class MyApp extends StatelessWidget {
   }
 }
 List<GetPage<dynamic>> Quick = [
+  GetPage(
+    name: '/',
+    page: () => const LongPicMasterView(),
+    binding: LongPicMasterBinding(),
+    transition: Transition.cupertino,
+    popGesture: true,
+    preventDuplicates: false,
+  ),
   GetPage(
     name: '/long_home',
     page: () => const LongPicHomeView(),
@@ -124,6 +135,13 @@ List<GetPage<dynamic>> Quick = [
     name: '/long_mosaic',
     page: () => const LongPicMosaicView(),
     binding: LongPicMosaicBinding(),
+    transition: Transition.cupertino,
+    popGesture: true,
+    preventDuplicates: false,
+  ),
+  GetPage(
+    name: '/long_latest',
+    page: () => const LongPicMosaicLatest(),
     transition: Transition.cupertino,
     popGesture: true,
     preventDuplicates: false,

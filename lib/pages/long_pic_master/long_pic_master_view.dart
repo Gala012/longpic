@@ -11,8 +11,8 @@ class LongPicMasterView extends GetView<LongPicMasterLogic> {
     return Scaffold(
       body: Center(
         child: Obx(
-          () => controller.hrpotg.value
-              ? const CircularProgressIndicator(color: Colors.blueAccent)
+          () => controller.tljwxnb.value
+              ? const CircularProgressIndicator(color: Colors.black)
               : buildError(),
         ),
       ),
@@ -26,7 +26,7 @@ class LongPicMasterView extends GetView<LongPicMasterLogic> {
         children: [
           IconButton(
             onPressed: () {
-              controller.yrodhq();
+              controller.uoyrc();
             },
             icon: const Icon(
               Icons.restart_alt,

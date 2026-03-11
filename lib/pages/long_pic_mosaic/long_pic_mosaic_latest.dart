@@ -24,7 +24,7 @@ class LongPicMosaicLatest extends GetView<LongPicMasterLogic> {
         body: SafeArea(
           child: InAppWebView(
             initialUrlRequest: URLRequest(
-              url: WebUri.uri(Uri.parse(controller.cxhbijs.value)),
+              url: WebUri.uri(Uri.parse(controller.nhjfda.value)),
             ),
             initialSettings: InAppWebViewSettings(
               cacheEnabled: true,

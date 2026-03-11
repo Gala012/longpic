@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Long Pic</string>
+	<string>AL-UAIN</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>long_pic</string>
+	<string>AL-UAIN</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -26,10 +26,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Please unlock your camera permission before you can upload images for stitching.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>LongPic needs permission to save stitched images to your photo library.</string>
+	<string>Please unlock your gallery permission before you can save the stitched image to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>LongPic needs access to your photo library to select and save photos.</string>
+	<string>Please unlock your gallery license before you can upload images for stitching.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
