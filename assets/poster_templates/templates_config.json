@@ -1,0 +1,173 @@
+[
+  {
+    "id": "template_001",
+    "name": "Fresh Nature",
+    "thumbnail": "assets/poster_templates/template_001.jpg",
+    "templateUrl": "assets/poster_templates/template_001.jpg",
+    "imageSlots": [
+      {
+        "x": 100,
+        "y": 400,
+        "width": 400,
+        "height": 300,
+        "shape": "rectangle"
+      },
+      {
+        "x": 100,
+        "y": 800,
+        "width": 400,
+        "height": 300,
+        "shape": "rectangle"
+      },
+      {
+        "x": 100,
+        "y": 1200,
+        "width": 400,
+        "height": 300,
+        "shape": "rectangle"
+      }
+    ],
+    "requiredImageCount": 3
+  },
+  {
+    "id": "template_002",
+    "name": "Minimal Blue",
+    "thumbnail": "assets/poster_templates/template_002.jpg",
+    "templateUrl": "assets/poster_templates/template_002.jpg",
+    "imageSlots": [
+      {
+        "x": 100,
+        "y": 300,
+        "width": 400,
+        "height": 300,
+        "shape": "roundRect"
+      },
+      {
+        "x": 100,
+        "y": 700,
+        "width": 400,
+        "height": 300,
+        "shape": "roundRect"
+      },
+      {
+        "x": 100,
+        "y": 1100,
+        "width": 400,
+        "height": 300,
+        "shape": "roundRect"
+      },
+      {
+        "x": 100,
+        "y": 1500,
+        "width": 400,
+        "height": 300,
+        "shape": "roundRect"
+      }
+    ],
+    "requiredImageCount": 4
+  },
+  {
+    "id": "template_003",
+    "name": "Warm Sunset",
+    "thumbnail": "assets/poster_templates/template_003.jpg",
+    "templateUrl": "assets/poster_templates/template_003.jpg",
+    "imageSlots": [
+      {
+        "x": 150,
+        "y": 500,
+        "width": 500,
+        "height": 500,
+        "shape": "circle"
+      },
+      {
+        "x": 150,
+        "y": 1100,
+        "width": 500,
+        "height": 500,
+        "shape": "circle"
+      }
+    ],
+    "requiredImageCount": 2
+  },
+  {
+    "id": "template_004",
+    "name": "Green Forest",
+    "thumbnail": "assets/poster_templates/template_004.jpg",
+    "templateUrl": "assets/poster_templates/template_004.jpg",
+    "imageSlots": [
+      {
+        "x": 100,
+        "y": 400,
+        "width": 450,
+        "height": 300,
+        "shape": "rectangle"
+      },
+      {
+        "x": 100,
+        "y": 800,
+        "width": 450,
+        "height": 300,
+        "shape": "rectangle"
+      },
+      {
+        "x": 100,
+        "y": 1200,
+        "width": 450,
+        "height": 300,
+        "shape": "rectangle"
+      }
+    ],
+    "requiredImageCount": 3
+  },
+  {
+    "id": "template_005",
+    "name": "Pink Aesthetic",
+    "thumbnail": "assets/poster_templates/template_005.jpg",
+    "templateUrl": "assets/poster_templates/template_005.jpg",
+    "imageSlots": [
+      {
+        "x": 80,
+        "y": 250,
+        "width": 250,
+        "height": 250,
+        "shape": "roundRect"
+      },
+      {
+        "x": 350,
+        "y": 250,
+        "width": 250,
+        "height": 250,
+        "shape": "roundRect"
+      },
+      {
+        "x": 80,
+        "y": 550,
+        "width": 250,
+        "height": 250,
+        "shape": "roundRect"
+      },
+      {
+        "x": 350,
+        "y": 550,
+        "width": 250,
+        "height": 250,
+        "shape": "roundRect"
+      },
+      {
+        "x": 80,
+        "y": 850,
+        "width": 250,
+        "height": 250,
+        "shape": "roundRect"
+      },
+      {
+        "x": 350,
+        "y": 850,
+        "width": 250,
+        "height": 250,
+        "shape": "roundRect"
+      }
+    ],
+    "requiredImageCount": 6
+  }
+]
