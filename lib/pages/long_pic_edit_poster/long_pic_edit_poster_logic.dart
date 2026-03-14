@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:photo_manager/photo_manager.dart';
 import '../../db_long_pic/data.dart';
 import '../../db_long_pic/db_long_pic_entity.dart';
 import '../../utils/index.dart';
@@ -16,7 +15,7 @@ import '../long_pic_poster_templates/poster_template_model.dart';
 class LongPicEditPosterLogic extends GetxController {
   String? templateId;
   String? templateName;
-  List<AssetEntity> selectedPhotos = [];
+  List<String> photosPaths = [];
   Rx<PosterTemplate?> template = Rx<PosterTemplate?>(null);
   final RxList<Uint8List?> loadedImages = <Uint8List?>[].obs;
   final RxBool isLoading = true.obs;
@@ -38,8 +37,11 @@ class LongPicEditPosterLogic extends GetxController {
       }
       templateId = arguments['templateId'] as String?;
       templateName = arguments['templateName'] as String?;
-      selectedPhotos = arguments['photos'] as List<AssetEntity>? ?? [];
-      if (templateId == null || selectedPhotos.isEmpty) {
+      final photosData = arguments['photos'];
+      if (photosData is List) {
+        photosPaths = photosData.map((e) => e.toString()).toList();
+      }
+      if (templateId == null || photosPaths.isEmpty) {
         errorToast('Invalid template or photos');
         Get.back();
         return;
@@ -60,7 +62,7 @@ class LongPicEditPosterLogic extends GetxController {
       );
       final List<dynamic> jsonList = json.decode(jsonString) as List;
       final templateJson = jsonList.firstWhere(
-        (item) => item['id'] == templateId,
+            (item) => item['id'] == templateId,
         orElse: () => null,
       );
       if (templateJson == null) {
@@ -74,11 +76,12 @@ class LongPicEditPosterLogic extends GetxController {
   }
   Future<void> _loadPhotosData() async {
     try {
-      loadedImages.value = List.filled(selectedPhotos.length, null);
-      for (int i = 0; i < selectedPhotos.length; i++) {
-        final photo = selectedPhotos[i];
-        final bytes = await photo.originBytes;
-        if (bytes != null) {
+      loadedImages.value = List.filled(photosPaths.length, null);
+      for (int i = 0; i < photosPaths.length; i++) {
+        final filePath = photosPaths[i];
+        final file = File(filePath);
+        if (await file.exists()) {
+          final bytes = await file.readAsBytes();
           loadedImages[i] = bytes;
         }
       }
@@ -123,10 +126,10 @@ class LongPicEditPosterLogic extends GetxController {
   Future<Uint8List?> _capturePoster() async {
     try {
       final RenderRepaintBoundary boundary =
-          posterKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      posterKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final ui.Image image = await boundary.toImage(pixelRatio: 5.0);
       final ByteData? byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      await image.toByteData(format: ui.ImageByteFormat.png);
       return byteData?.buffer.asUint8List();
     } catch (e) {
       print('Capture error: $e');

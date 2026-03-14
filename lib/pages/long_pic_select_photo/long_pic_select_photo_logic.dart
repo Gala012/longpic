@@ -5,6 +5,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 import '../../utils/index.dart';
+
 class LongPicSelectPhotoLogic extends GetxController {
   late final String mode;
   String? templateId;
@@ -36,21 +37,24 @@ class LongPicSelectPhotoLogic extends GetxController {
     _requestPermissionAndLoad();
     _initScrollListener();
   }
+
   @override
   void onClose() {
     scrollController.dispose();
     super.onClose();
   }
+
   void _initScrollListener() {
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
-              scrollController.position.maxScrollExtent - 200 &&
+          scrollController.position.maxScrollExtent - 200 &&
           !isLoadingMore.value &&
           hasMorePhotos) {
         _loadMorePhotos();
       }
     });
   }
+
   Future<void> _requestPermissionAndLoad() async {
     try {
       final PermissionState ps = await PhotoManager.requestPermissionExtend();
@@ -63,6 +67,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       errorToast('Failed to access photos: ${e.toString()}');
     }
   }
+
   void _showPermissionDialog() {
     Get.dialog(
       AlertDialog(
@@ -86,6 +91,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       ),
     );
   }
+
   Future<void> _loadAlbums() async {
     try {
       isLoading.value = true;
@@ -107,6 +113,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       isLoading.value = false;
     }
   }
+
   Future<void> _loadPhotos(AssetPathEntity album) async {
     try {
       isLoading.value = true;
@@ -126,6 +133,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       isLoading.value = false;
     }
   }
+
   Future<void> _loadMorePhotos() async {
     if (currentAlbum == null || isLoadingMore.value || !hasMorePhotos) return;
     try {
@@ -138,7 +146,7 @@ class LongPicSelectPhotoLogic extends GetxController {
         return;
       }
       final assets =
-          await currentAlbum!.getAssetListRange(start: start, end: actualEnd);
+      await currentAlbum!.getAssetListRange(start: start, end: actualEnd);
       photos.addAll(assets);
       currentPage++;
       hasMorePhotos = photos.length < totalCount;
@@ -148,6 +156,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       isLoadingMore.value = false;
     }
   }
+
   void onPhotoTap(AssetEntity photo) {
     if (selectedPhotos.contains(photo)) {
       selectedPhotos.remove(photo);
@@ -161,6 +170,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       selectedPhotos.add(photo);
     }
   }
+
   bool isSelected(AssetEntity photo) => selectedPhotos.contains(photo);
   int selectionOrder(AssetEntity photo) => selectedPhotos.indexOf(photo) + 1;
   Future<List<String>> _compressPhotos(List<AssetEntity> photos) async {
@@ -200,6 +210,7 @@ class LongPicSelectPhotoLogic extends GetxController {
     }
     return compressedPaths;
   }
+
   Future<void> onDoneTap() async {
     if (selectedPhotos.isEmpty) return;
     if (mode == 'poster' &&
@@ -252,6 +263,7 @@ class LongPicSelectPhotoLogic extends GetxController {
       errorToast('Failed to process images: ${e.toString()}');
     }
   }
+
   String _getTargetRoute(String mode) {
     switch (mode) {
       case 'horizontal':
@@ -265,59 +277,5 @@ class LongPicSelectPhotoLogic extends GetxController {
       default:
         return '/long_edit_vertical';
     }
-  }
-}
-class _AlbumPickerSheet extends StatelessWidget {
-  final List<AssetPathEntity> albums;
-  final AssetPathEntity? current;
-  const _AlbumPickerSheet({required this.albums, required this.current});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.6,
-      ),
-      decoration: const BoxDecoration(
-        color: Color(0xFF1A1A1A),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            width: 36,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: albums.length,
-              itemBuilder: (_, i) {
-                final album = albums[i];
-                final isSelected = album.id == current?.id;
-                return ListTile(
-                  title: Text(
-                    album.name,
-                    style: TextStyle(
-                      color: isSelected ? Colors.green : Colors.white,
-                      fontWeight:
-                          isSelected ? FontWeight.bold : FontWeight.normal,
-                    ),
-                  ),
-                  trailing: isSelected
-                      ? const Icon(Icons.check, color: Colors.green)
-                      : null,
-                  onTap: () => Get.back(result: album),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).padding.bottom + 8),
-        ],
-      ),
-    );
   }
 }
